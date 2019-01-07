@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 public class Assignment4 {
-    private final String databaseName = "[DB2019_Ass2]";
+    private final String databaseName = "DB2019_Ass2";
     private final DatabaseManager databaseManager = new DatabaseManagerMSSQLServer(databaseName);
 
 
@@ -70,16 +70,16 @@ public class Assignment4 {
     public static void main(String[] args) {
 
         File file = new File(".");
-        String csvFile = "src/filename.csv";
+        String csvFile = args[0];
         String line = "";
         String cvsSplitBy = ",";
         Assignment4 ass = new Assignment4();
 
-        ass.updateAllProjectsBudget(100);
-        System.out.println(ass.getEmployeeTotalSalary());
-        System.out.println(ass.getMostProfitableParkingAreas());
-        System.out.println(ass.getNumberOfParkingByArea());
-        System.out.println(ass.getNumberOfDistinctCarsByArea());
+        //ass.updateAllProjectsBudget(100);
+        //System.out.println(ass.getEmployeeTotalSalary());
+        //System.out.println(ass.getMostProfitableParkingAreas());
+        //System.out.println(ass.getNumberOfParkingByArea());
+        //System.out.println(ass.getNumberOfDistinctCarsByArea());
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
@@ -187,7 +187,7 @@ public class Assignment4 {
 
     }
     private void dropDB() {
-        DatabaseManager databaseManager = new DatabaseManagerMSSQLServer(databaseName);
+        DatabaseManager databaseManager = new DatabaseManagerMSSQLServer("master");
         databaseManager.startConnection();
 
         String query = "DROP DATABASE DB2019_Ass2";
@@ -197,7 +197,7 @@ public class Assignment4 {
     }
 
     private void initDB(String csvPath) {
-        DatabaseManager master = new DatabaseManagerMSSQLServer(databaseName);
+        DatabaseManager master = new DatabaseManagerMSSQLServer("master");
         String line = "";
         String cvsSplitBy = ",";
         String file = "";
